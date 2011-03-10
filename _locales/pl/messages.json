@@ -1,0 +1,65 @@
+{
+  "extension_description": {
+    "message": "Rozszerzenie dodaje podpowiedzi wyszukiwarki YouTube do Omniboxa. Dodatkowo zamienia wszystkie odnośniki do serwisu YouTube na bardziej przyjazne dla użytkownika informacje o klipie. Wystarczy wpisać 'yt' i nacisnąć przycisk TAB lub spację."
+  },
+  "extension_action": {
+    "message": "Zamień odnośniki!"
+  },
+  "options_title": {
+    "message": "OmniTube opcje"
+  },
+  "fieldset_omnibox_legend": {
+    "message": "Podpowiedzi Omnibox"
+  },
+  "language": {
+    "message": "Język"
+  },
+  "fieldset_convert_legend": {
+    "message": "Przyjazne odnośniki"
+  },
+  "convert_links": {
+    "message": "Zamień odnośniki"
+  },
+  "convert_links_automatic": {
+    "message": "automatycznie"
+  },
+  "convert_links_click": {
+    "message": "po kliknięciu"
+  },
+  "convert_title_label": {
+    "message": "Dodaj \"dymek\"  z informacjami o klipie"
+  },
+  "convert_title_always": {
+    "message": "zawsze"
+  },
+  "convert_title_empty": {
+    "message": "gdy atrybut \"title\" jest pusty"
+  },
+  "convert_content_label": {
+    "message": "Zastąp treść odnośnika informacjami o klipie"
+  },
+  "convert_content_always": {
+    "message": "zawsze"
+  },
+  "convert_content_text": {
+    "message": "gdy odnośniki zawiera tylko tekst"
+  },
+  "convert_content_link": {
+    "message": "gdy tekst odnośnika jest taki jak adres url"
+  },
+  "save": {
+    "message": "Zapisz"
+  },
+  "saved": {
+    "message": "Zapisano"
+  },
+  "search_label": {
+    "message": "Szukaj"
+  },
+  "restore_defaults": {
+    "message": "Przywróć domyślne"
+  },
+  "video_404": {
+    "message": "Nie znaleziono klipu"
+  }
+}

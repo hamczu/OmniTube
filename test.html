@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>OmniTube test</title>
+        <link rel="stylesheet" href="css/example.css" type="text/css" />
+        <script type="text/javascript">
+            /*
+            
+           window.onload = function(){
+                function RequestPermission(callback) {
+                        window.webkitNotifications.requestPermission(callback);
+                    }
+
+                    function notif() {
+                      if (window.webkitNotifications.checkPermission() > 0) {
+                        RequestPermission(notif);
+                      } else {
+                        window.webkitNotifications.createNotification('img/youtube.png', 'Notification Title', 'Notification content...');
+                        //notification.show();
+                      }
+                    }
+                document.getElementById('add').addEventListener('click', function(e){                
+                  //  document.getElementById('examples').innerHTML = '<a href="http://www.youtube.com/watch?v=qGyPuey-1Jw">http://www.youtube.com/watch?v=qGyPuey-1Jw</a>';
+                });
+            }  */   
+        </script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-7218577-43']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = 'https://ssl.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+
+        <div id="wrap">
+            <div id="main">
+
+                <!--      <button id="add">Dodaj!</button>
+       <button id="convert">Convert</button>-->
+
+
+                <h1>OmniTube</h1>
+                <div id="examples">
+                    <table>
+                        <thead>
+                            <tr>
+<!--                                <th>Description</th>-->
+                                <th>Przed</th>
+                                <th>Po</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" class="omnitube-disable">http://www.youtube.com/watch?v=nCgQDjiotG0w</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0">http://www.youtube.com/watch?v=nCgQDjiotG0</a></td>
+                            </tr>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=0QRO3gKj3qw" class="omnitube-disable">http://www.youtube.com/watch?v=0QRO3gKj3qw</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=0QRO3gKj3qw">http://www.youtube.com/watch?v=0QRO3gKj3qw</a></td>
+                            </tr>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=c5ryTLrgTbI" class="omnitube-disable">http://www.youtube.com/watch?v=c5ryTLrgTbI</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=c5ryTLrgTbI">http://www.youtube.com/watch?v=c5ryTLrgTbI</a></td>
+                            </tr>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=VO6XEQIsCoM" class="omnitube-disable">http://www.youtube.com/watch?v=VO6XEQIsCoM</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=VO6XEQIsCoM">http://www.youtube.com/watch?v=VO6XEQIsCoM</a></td>
+                            </tr>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=LdwW8T7zftQ" class="omnitube-disable">http://www.youtube.com/watch?v=LdwW8T7zftQ</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=LdwW8T7zftQ">http://www.youtube.com/watch?v=LdwW8T7zftQ</a></td>
+                            </tr>
+                            <tr>
+<!--                                <td></td>-->
+                                <td><a href="http://www.youtube.com/watch?v=GLbRvcbkAwE" class="omnitube-disable">świetny film</a></td>
+                                <td><a href="http://www.youtube.com/watch?v=GLbRvcbkAwE">świetny film</a></td>
+                            </tr>
+                            <!--                            <tr>
+                                                            <td></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" class="omnitube-disable">url without "www" prefix</a></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0">url without "www" prefix</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" class="omnitube-disable">link with <strong>HTML</strong> inside</a></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0">link with <strong>HTML</strong> inside</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" title="Title example" class="omnitube-disable">With title</a></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" title="Title example">With title</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Removed video</td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0" class="omnitube-disable">Removed</a></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=nCgQDjiotG0">Removed</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Complicated url</td>
+                                                            <td><a href="http://www.youtube.com/watch?v=w7VNjGuSK_k&feature=relmfu" class="omnitube-disable">Complicated url</a></td>
+                                                            <td><a href="http://www.youtube.com/watch?v=w7VNjGuSK_k&feature=relmfu">Complicated url</a></td>
+                                                        </tr>-->
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <div id="push"></div>
+        </div>
+
+        <div id="footer">
+            <div id="inFooter">
+                <a href="http://www.101studio.pl" id="logo">101studio</a>
+            </div>
+        </div>
+
+    </body>
+</html>

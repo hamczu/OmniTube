@@ -1,0 +1,65 @@
+{
+  "extension_description": {
+    "message": "Add YouTube suggestions and search results to Omnibox. In addition extension replaces hyperlinks to YouTube videos with video details (more user friendly format). Just type 'yt' and hit TAB or spacebar."
+  },
+  "extension_action": {
+    "message": "Convert!"
+  },
+  "options_title": {
+    "message": "OmniTube options"
+  },
+  "fieldset_omnibox_legend": {
+    "message": "Omnibox suggestions"
+  },
+  "language": {
+    "message": "Language"
+  },
+  "fieldset_convert_legend": {
+    "message": "Links conversion"
+  },
+  "convert_links": {
+    "message": "Replace links"
+  },
+  "convert_links_automatic": {
+    "message": "automaticly"
+  },
+  "convert_links_click": {
+    "message": "on click"
+  },
+  "convert_title_label": {
+    "message": "Replace link title attribute with video details"
+  },
+  "convert_title_always": {
+    "message": "always"
+  },
+  "convert_title_empty": {
+    "message": "if empty"
+  },
+  "convert_content_label": {
+    "message": "Replace link content with video details"
+  },
+  "convert_content_always": {
+    "message": "always"
+  },
+  "convert_content_text": {
+    "message": "if link contains only text"
+  },
+  "convert_content_link": {
+    "message": "if link text is the same as URL"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "saved": {
+    "message": "Saved"
+  },
+  "search_label": {
+    "message": "Search"
+  },
+  "restore_defaults": {
+    "message": "Restore defaults"
+  },
+  "video_404": {
+    "message": "Video not found"
+  }
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title id="options_title" class="lang"></title>
+        <link rel="stylesheet" type="text/css" href="css/options.css"/>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/options.js"></script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-7218577-43']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = 'https://ssl.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+                <h1>OmniTube</h1>
+                <form action="">
+                    <fieldset>
+                        <legend id="fieldset_omnibox_legend" class="lang">Omnibox suggestions</legend>
+                        <label id="language" for="omnibox_lang" class="lang">Language</label>
+                        <select name="omnibox_lang" id="omnibox_lang">
+                            <option value="en">English</option>
+                            <option value="pl">Polski</option>
+                        </select>
+                        <br/>
+                        <!--                <label><input type="checkbox" name="omnibox_suggest" />Sugestie</label><br/>
+                                        <label><input type="checkbox" name="omnibox_search" />Wyniki wyszukiwania</label><br/>
+                                        <label><input type="checkbox" name="omnibox_favorites"  />Ulubione (musisz być zalogowany do YT)</label><br/>-->
+                    </fieldset>
+                    <br/>
+                    <fieldset id="fieldset_convert">
+                        <legend id="fieldset_convert_legend" class="lang">Links conversion</legend>
+                        <input type="checkbox" name="convert" id="convert" /><label id="convert_links" class="lang bold" for="convert">Convert links</label><br/>
+                        <div id="convert_box">
+                            <input type="radio" name="convert_mode" value="auto" id="convert_links_automatic_input" /><label id="convert_links_automatic" class="lang" for="convert_links_automatic_input"></label><br/>
+                            <input type="radio" name="convert_mode" value="click" id="convert_links_click_input"/><label id="convert_links_click" for="convert_links_click_input" class="lang"></label>
+                            <div class="hr"></div>
+                            <input type="checkbox" name="convert_title" id="convert_title" /><label id="convert_title_label" for="convert_title" class="lang bold"></label>
+                            <div id="convert_title_box">
+                                <input type="radio" name="convert_title_mode" id="convert_title_always_input" value="always"/><label id="convert_title_always" for="convert_title_always_input" class="lang"></label><br/>
+                                <input type="radio" name="convert_title_mode" id="convert_title_empty_input" value="empty" /><label id="convert_title_empty" for="convert_title_empty_input" class="lang"></label><br/>
+                                <label class="margin">Format: <input type="text" id="convert_title_format" name="convert_title_format" class="format" /></label>
+                                <!--                                                    <span class="help">pomoc</span>
+                                                                <div class="help-box">
+                                                                    Dostępne zmienne:
+                                                                    <ul>
+                                                                        <li>title</li>
+                                                                        <li>duration - długość filmu w sekundach</li>
+                                                                        <li>time - długość filmu zamieniona na minuty i sekundy</li>
+                                                                        <li>id - identyfikator filmu</li>
+                                                                        <li>uploaded - data wysłania filmu</li>
+                                                                        <li>updated - data modyfikacji</li>
+                                                                        <li>uploader - wysyłający</li>
+                                                                        <li>category - kategoria</li>
+                                                                        <li>aspectRatio - proporcje obrazu</li>
+                                                                        <li>rating - ocena</li>
+                                                                        <li>ratingCount - liczba wszystkich ocen</li>
+                                                                        <li>viewCount - liczba wyświetleń</li>
+                                                                        <li>favoriteCount - liczba oznaczeń jako ulubione</li>
+                                                                        <li>commentCount - liczba komentarzy</li>
+                                                                        <li>thumbnail - link do miniatury</li>
+                                                                    </ul>
+                                                                </div>-->
+                            </div>
+                            <div class="hr"></div>
+                            <input type="checkbox" name="convert_content" id="convert_content" name="convert_content" /><label id="convert_content_label" for="convert_content" class="bold lang" ></label><br/>
+                            <div id="convert_content_box">
+                                <input type="radio" name="convert_content_mode" value="always" id="convert_content_always_input" /><label id="convert_content_always" for="convert_content_always_input" class="lang"></label><br/>
+                                <input type="radio" name="convert_content_mode" value="text" id="convert_content_text_input" /><label id="convert_content_text" for="convert_content_text_input" class="lang"></label><br/>
+                                <input type="radio" name="convert_content_mode" value="link" id="convert_content_link_input" /><label id="convert_content_link" for="convert_content_link_input" class="lang"></label><br/>
+                                <label class="margin">Format: <input type="text" id="convert_content_format"  name="convert_content_format" class="format" /></label>
+                                <!--                                                    <span class="help">pomoc</span>
+                                                                <div class="help-box">
+                                                                    Dostępne zmienne:
+                                                                    <ul>
+                                                                        <li>title</li>
+                                                                        <li>duration - długość filmu w sekundach</li>
+                                                                        <li>time - długość filmu zamieniona na minuty i sekundy</li>
+                                                                        <li>id - identyfikator filmu</li>
+                                                                        <li>uploaded - data wysłania filmu</li>
+                                                                        <li>updated - data modyfikacji</li>
+                                                                        <li>uploader - wysyłający</li>
+                                                                        <li>category - kategoria</li>
+                                                                        <li>description - opis</li>
+                                                                        <li>aspectRatio - proporcje obrazu</li>
+                                                                        <li>rating - ocena</li>
+                                                                        <li>ratingCount - liczba wszystkich ocen</li>
+                                                                        <li>viewCount - liczba wyświetleń</li>
+                                                                        <li>favoriteCount - liczba oznaczeń jako ulubione</li>
+                                                                        <li>commentCount - liczba komentarzy</li>
+                                                                        <li>thumbnail - link do miniatury</li>
+                                                                        <li>image - gotowy element IMG z miniaturą</li>
+                                                                    </ul>
+                                                                </div>-->
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div id="buttons">
+                        <div id="restore_defaults" class="lang">Restore defaults</div>
+                        <input type="submit" value="" id="save" />
+                        <!--                <a href="example.html" id="test">Przetestuj</a>-->
+                        <div style="clear:both"></div>
+                    </div>
+                </form>
+            </div>
+            <div id="push"></div>
+        </div>
+
+        <div id="footer">
+            <div id="inFooter">
+                <a href="http://www.101studio.pl" id="logo">101studio</a>
+            </div>
+        </div>
+    </body>
+</html>

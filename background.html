@@ -1,0 +1,344 @@
+<script>
+    var options = {};
+    var currentRequest = null;
+    var vid = 'id:';
+    // <img src="' + data.thumbnail.sqDefault + '" alt="" />
+    var favorites = [];
+
+    function updateOptions(lang){
+        try {
+            options = JSON.parse(localStorage.options);
+        }catch(e){
+        }
+        var defaults = {
+            omnibox_lang: lang,
+            convert: true,
+            convert_mode: 'auto',
+            convert_title: true,
+            convert_title_mode: 'always',
+            convert_title_format: '$title ($time)',
+            convert_content: true,
+            convert_content_mode: 'link',
+            convert_content_format: '$title ($time)'
+        };
+        for(var key in defaults){
+            if(options[key] == undefined){
+                options[key] = defaults[key];
+            }
+        }
+        console.log(options);
+    }
+
+    chrome.i18n.getAcceptLanguages(function(languages) {
+        updateOptions(languages[0].substr(0, 2));
+    });
+
+    chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
+        if (currentRequest != null) {
+            currentRequest.onreadystatechange = null;
+            currentRequest.abort();
+            currentRequest = null;
+        }        
+
+        updateDefaultSuggestion(text);
+        
+        if(text.length > 0){
+            currentRequest = suggests(text, function(data) {
+                var results = [];
+
+                //                if(options.omnibox.favorites){
+                //                    var temp = getFavorites(text, 2);
+                //                    for(var i = 0; i < temp.length; i++){
+                //                        results.push({
+                //                            content: vid + temp[i].id,
+                //                            description: temp[i].title
+                //                        });
+                //                    }
+                //                }
+                //                if(options.omnibox.search && i == 0){
+                //                    search(data[1][i][0], function(){
+                //
+                //                    });
+                //                }
+                for(var i = 0; i < data[1].length; i++){
+                    results.push({
+                        content: data[1][i][0],
+                        description: data[1][i][0]
+                    });
+                }
+
+                suggest(results);
+            });
+        }else {
+            //            if(options.omnibox.favorites){
+            //                if(text.indexOf('f ') == 0){
+            //                    text = text.substr(2);
+            //                    console.log(text);
+            //                }
+            //                console.log(text);
+            //                var temp = getFavorites(text, 5);
+            //                console.log(temp);
+            //                var results = [];
+            //                for(var i = 0; i < temp.length; i++){
+            //                    results.push({
+            //                        content: vid + temp[i].id,
+            //                        description: temp[i].title
+            //                    });
+            //                }
+            //                suggest(results);
+            //            }
+        }
+    }
+);
+
+    function resetDefaultSuggestion() {      
+        chrome.omnibox.setDefaultSuggestion({
+            description: ' '
+        });
+    }
+
+    resetDefaultSuggestion();
+    var searchLabel = chrome.i18n.getMessage('search_label');
+    function updateDefaultSuggestion(text) {      
+        chrome.omnibox.setDefaultSuggestion({
+            description: searchLabel + ': %s'
+        });
+        //        if(options.omnibox.favorites && text.length){
+        //            var fav = getFavorites(text, 1);
+        //            if(fav[0]){
+        //                chrome.omnibox.setDefaultSuggestion({
+        //                    description: fav[0].title
+        //                });
+        //            }
+        //        }
+    }
+
+    chrome.omnibox.onInputStarted.addListener(function() {
+        updateDefaultSuggestion('');
+    });
+
+    chrome.omnibox.onInputCancelled.addListener(function() {
+        resetDefaultSuggestion();
+    });
+    
+    //    window.onload = function(){
+    //        var temp = document.getElementById('temp');
+    //        if(options.omnibox.favorites){
+    //            var req = new XMLHttpRequest();
+    //            req.open("GET", "http://www.youtube.com/my_favorites", true);
+    //            req.onload = function(){
+    //                if(this.status == 200){
+    //                    temp.contentDocument.body.innerHTML = this.response;
+    //
+    //                    var lis = temp.contentDocument.getElementById('vm-playlist-video-list-ol').getElementsByTagName('li');
+    //                    for (var i = 0; i < lis.length; i++){
+    //                        favorites.push({
+    //                            id: lis[i].id.substr(9),
+    //                            title: lis[i].getElementsByTagName('a')[1].textContent,
+    //                            time: lis[i].getElementsByTagName('a')[0].getElementsByTagName('span')[2].textContent
+    //                        });
+    //                    }
+    //                    console.log(favorites);
+    //                }else{
+    //                    this.onerror();
+    //                }
+    //            };
+    //            req.onerror = function(){
+    //
+    //            };
+    //            req.send();
+    //        }
+    //    }
+    //    var query = 'gig';
+    //    var regex = new RegExp(query, 'i');
+    //    if(regex.test( "Gigi d'Agostino - L'amour toujours on church organ")){
+    //        result.push(favorites[i]);
+    //    }
+    //
+    function getFavorites(query, limit){
+        var result = [];
+        var found = 0;
+        var regex = new RegExp(query, 'i');
+        for(var i = 0; i < favorites.length; i++){
+            if(regex.test(favorites[i].title)){
+                result.push(favorites[i]);
+                found++;
+                if(found == limit){
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    function suggests(query, callback) {
+        var req = new XMLHttpRequest();
+        // hjson=t - callback ?
+        // hl - lang
+        // cp - ?
+        // http://suggestqueries.google.com/complete/search?hl=pl&ds=yt&client=youtube&hjson=t&jsonp=window.yt.www.suggest.handleResponse&q=szy&cp=3
+        // hl:pl
+        //ds:yt
+        //client:youtube
+        //hjson:t
+        //jsonp:window.yt.www.suggest.handleResponse
+        //q:szy
+        //cp:3
+        req.open("GET", "http://suggestqueries.google.com/complete/search?hl=" + options.omnibox_lang + "&ds=yt&client=youtube&hjson=t&q=" + query, true);
+        req.onload = function(){
+            if(this.status == 200){
+                try{
+                    callback(JSON.parse(this.responseText));
+                }catch(e){
+                    this.onerror();
+                }
+            }else{
+                this.onerror();
+            }
+        };
+        req.onerror = function(){
+
+        };
+        req.send();
+    }
+
+    function search(query, callback) {
+        // to do: consider using JSONP here
+        // jsonp=window.yt.www.suggest.handleResponse&
+
+        var req = new XMLHttpRequest();
+        req.open("GET", "http://gdata.youtube.com/feeds/api/videos?orderby=published&alt=jsonc&start-index=11&max-results=10&v=2&q=" + query, true);
+        req.onload = function(){
+            if(this.status == 200){
+                try{
+                    console.log(JSON.parse(this.responseText));
+                }catch(e){
+
+                }
+            }else{
+                this.onerror();
+            }
+        };
+        req.onerror = function(){
+
+        };
+        //        req.send();
+    }
+
+    //    function getEntryUrl(entry) {
+    //        return getUrl(
+    //        entry.getElementsByTagName("file")[0].getAttribute("name"),
+    //        entry.getElementsByTagName("match")[0].getAttribute("lineNumber"));
+    //        return url;
+    //    }
+
+    function navigate(url) {
+        chrome.tabs.getSelected(null, function(tab) {
+            chrome.tabs.update(tab.id, {url: url});
+        });
+    }
+
+    chrome.omnibox.onInputEntered.addListener(function(text) {
+        console.log(text);
+        navigate("http://www.youtube.com/results?search_query=" + text);
+    });
+
+    function tmpl(tpl, data){
+        for(var name in data){
+            tpl = tpl.replace('$' + name, data[name]);
+        }
+        return tpl;
+    }
+    function convert(tabId){
+        chrome.tabs.sendRequest(tabId, {
+            command: 'data'
+        }, function(data) {            
+            for(var i = 0; i < data.length; i++){
+                var req = new XMLHttpRequest();
+                req.open("GET", "http://gdata.youtube.com/feeds/api/videos/"+ data[i].id +"?alt=jsonc&v=2", true);
+                req.documentId = data[i].documentId;
+                req.onload = function(){
+                    var title = '';
+                    var content = '';
+                    if(this.status == 200){
+                        try{
+                            var data = JSON.parse(this.responseText).data;
+                            console.log(data);
+                            data.time = secondsToTime(data.duration);                            
+                        }catch(e){
+
+                        }
+                        if(options.convert_title){
+                            title = tmpl(options.convert_title_format, data);
+                        }
+                        if(options.convert_content){
+                            content = tmpl(options.convert_content_format, data);
+                        }
+                        console.log(title);
+                        console.log(content);
+                    }else if (this.status == 404){
+                        title = chrome.i18n.getMessage('video_404');
+                        content = chrome.i18n.getMessage('video_404');
+                    }
+                    chrome.tabs.sendRequest(tabId, {
+                        command: 'convert',
+                        title: title,
+                        content: content,
+                        documentId: this.documentId
+                    });
+                };
+                req.onerror = function(){
+                    console.log(this);
+                };
+                req.send();
+            }
+        });        
+    }
+
+    chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {       
+        switch(request.command){
+            case 'options':
+                sendResponse(options);
+                break;
+            case 'found':
+                chrome.pageAction.show(sender.tab.id);
+                sendResponse();
+                if(options.convert_mode == 'auto'){
+                    convert(sender.tab.id);
+                }               
+                break;
+        }       
+    });
+
+    chrome.pageAction.onClicked.addListener(function(tab) { 
+        convert(tab.id);        
+    });
+    
+    function secondsToTime(time){
+        var minutes = Math.floor(time / 60);
+        var seconds = time - minutes * 60;
+        if(seconds < 10){
+            seconds = '0' + seconds;
+        }
+        return minutes + ':' + seconds;
+    }
+
+    //    chrome.pageAction.hide(integer tabId)
+    //    chrome.pageAction.show(integer tabId)
+
+    //    chrome.pageAction.onClicked.addListener(function(tab) {
+    //
+    //
+    //    });
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7218577-43']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+<iframe id="temp"></iframe>
