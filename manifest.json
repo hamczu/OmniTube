@@ -1,14 +1,21 @@
 {
   "name": "OmniTube",
   "version": "0.1.1",
-  "background_page": "background.html",
+  
   "description": "__MSG_extension_description__",
-  "omnibox": { "keyword" : "yt" },
-  "permissions": [ "tabs", "http://gdata.youtube.com/", "http://suggestqueries.google.com/" ],
+  "icons": { 
+      "16": "img/16.png",
+      "48": "img/48.png",
+      "128": "img/128.png"
+  },
+  "default_locale": "en",
+  
   "page_action": {
     "default_icon": "img/16.png",
     "default_title": "__MSG_extension_action__"
   },
+  
+  "background_page": "background.html",
   "content_scripts": [{
         "matches" : [
             "http://*/*",
@@ -17,12 +24,8 @@
         "js": ["js/content.js"],
         "run_at" : "document_idle"
   }],   
-  "icons": { 
-      "16": "img/16.png",
-      "48": "img/48.png",
-      "128": "img/128.png"
-  },
   "minimum_chrome_version": "9",
+  "omnibox": { "keyword" : "yt" },
   "options_page": "options.html",
-  "default_locale": "en"
+  "permissions": [ "tabs", "http://gdata.youtube.com/", "http://suggestqueries.google.com/" ]
 }
