@@ -3,18 +3,8 @@ try {
     data = JSON.parse(localStorage.options);   
 }catch(e){  
 }
-var defaults = {
-    omnibox_lang: '',
-    convert: true,
-    convert_mode: 'auto',
-    convert_title: true,
-    convert_title_mode: 'always',
-    convert_title_format: '$title ($time)',
-    convert_content: true,
-    convert_content_mode: 'link',
-    convert_content_format: '$title ($time)'
-};
 
+var defaults = chrome.extension.getBackgroundPage().defaults;
 var options = $.extend({}, defaults, data);
 
 console.log(options);
@@ -93,3 +83,13 @@ window.onload = function(){
         $('#save').removeClass('saved').val(chrome.i18n.getMessage('save'));
     });
 }
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7218577-43']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
